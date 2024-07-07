@@ -1,0 +1,88 @@
+class BusinessLine {
+
+    app_login() {
+
+        // prompt (response, response);
+        window.location.replace("../controllers/launcher.php") ;  
+
+    }
+
+    load_about(app_name) {
+
+        var strMessage = "<div class='dialog_message'>";
+        strMessage += "<h2>Supplier Details</h2><br>";
+        strMessage += "<h3>Andy Wood Software Projects</h3><br>";
+        strMessage += "<a href='tel:+447388519760'>07388 519 760</a><br>";
+        strMessage += "<a href='mailto:support@andywood.net'>support@andywood.net</a><br><br>";
+        strMessage += "Licensed to: Andy Wood Software Projects<br>";
+        strMessage += "Revision Number : 17.218";
+        strMessage += "</div>";
+
+        document.getElementById('dialog').style.display='block';
+        document.getElementById('dialog').style.position='fixed'; 
+        document.getElementById('dialog').style.top=screen.height/4 + "px"; 
+        document.getElementById('dialog').innerHTML="<div class='dialog_title'>About " + app_name + "</div><br>" + strMessage + "<br><br><a class=btnMenu onclick=bl.hide_all_dialogs()> OK </a><br><br>";        
+
+    }
+
+    hide_all_dialogs() {
+
+        document.getElementById('dialog').style.display='none';
+        document.getElementById('error').style.display='none';
+
+    }
+    reload(response) {
+
+        // prompt (response, response);
+        document.location.reload();
+
+    }
+
+    app_logout() {
+
+        var codeAction = "logout" ;
+        $.get("../controllers/ajax.php", {"code_action":codeAction}, this.app_login);
+    }
+
+    apply_billable_company_filter() {
+
+        var cde = document.getElementById('qryBillableCompanyFilter').value; 
+        var codeAction = "apply_company_billable_filter";
+        $.get("../controllers/ajax.php", {"code_action":codeAction,"filter":cde}, this.reload);
+
+    }
+
+    create_invoices() {
+
+        var codeAction = "createCompanyInvoices";
+        $.get("../controllers/ajax.php", {"code_action":codeAction}, this.confirm_invoice); 
+
+    }
+
+    confirm_invoice(response) {
+
+        var strMessage = "<div class='dialog_message'>";
+        strMessage += "Invoice " + response + " has been created.";
+        strMessage += "</div>";
+
+        document.getElementById('dialog').style.display='block';
+        document.getElementById('dialog').style.position='fixed'; 
+        document.getElementById('dialog').style.top=screen.height/4 + "px"; 
+        document.getElementById('dialog').innerHTML="<div class='dialog_title'>BusinessLine Message</div><br>" + strMessage + "<br><br><button class=btnMenu onclick=bl.reload()> OK </button><br><br>";    
+
+    }
+
+    previewInvoice(invoice_id) {
+
+        var codeAction = "previewInvoice";
+        $.get("../controllers/ajax.php", {"code_action":codeAction, "invoice_id":invoice_id}, this.show_invoice);         
+
+    }
+
+    show_invoice(full_path_name) {
+
+        window.open(full_path_name) ;  
+
+    }
+
+}
