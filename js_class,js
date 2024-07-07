@@ -12,8 +12,8 @@ class BusinessLine {
         var strMessage = "<div class='dialog_message'>";
         strMessage += "<h2>Supplier Details</h2><br>";
         strMessage += "<h3>Andy Wood Software Projects</h3><br>";
-        strMessage += "<a href='tel:+447388519760'>07388 519 760</a><br>";
-        strMessage += "<a href='mailto:support@andywood.net'>support@andywood.net</a><br><br>";
+        strMessage += "<a href='tel:+<restricted data>'><restricted data></a><br>";
+        strMessage += "<a href='mailto:<restricted data>'><restricted data></a><br><br>";
         strMessage += "Licensed to: Andy Wood Software Projects<br>";
         strMessage += "Revision Number : 17.218";
         strMessage += "</div>";
